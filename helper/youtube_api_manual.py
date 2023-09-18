@@ -10,6 +10,7 @@ import isodate
 # YT_API_KEY скопирован из гугла и вставлен в переменные окружения
 api_key: str = os.getenv('YT_API_KEY')
 
+
 # создать специальный объект для работы с API
 youtube = build('youtube', 'v3', developerKey=api_key)
 
@@ -58,11 +59,11 @@ playlist_videos = youtube.playlistItems().list(playlistId=playlist_id,
                                                part='contentDetails',
                                                maxResults=50,
                                                ).execute()
-# printj(playlist_videos)
+printj(playlist_videos)
 
 # получить все id видеороликов из плейлиста
 video_ids: list[str] = [video['contentDetails']['videoId'] for video in playlist_videos['items']]
-# print(video_ids)
+print(video_ids)
 
 
 '''
