@@ -13,6 +13,5 @@ class Channel:
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
-        channel = self.get_service().channels().list(id=self.channel_id,
-                                                     part="snippet,statistics").execute()
+        channel = self.get_service().channels().list(id=self.channel_id, part="snippet,statistics").execute()
 
