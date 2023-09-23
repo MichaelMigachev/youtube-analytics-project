@@ -19,10 +19,48 @@ class Channel:
         self.channel_subs_count = self.channel_info["items"][0]["statistics"]["subscriberCount"]
         self.channel_views = self.channel_info["items"][0]["statistics"]["viewCount"]
 
+    def __add__(self, other):
+        '''метод для операции сложение'''
+        return int(self.channel_subs_count) + int(other.channel_subs_count)
+
+    def __sub__(self, other):
+        '''метод для операции вычитания'''
+        return int(self.channel_subs_count) - int(other.channel_subs_count)
+
+    def __sub__(self, other):
+        '''метод для операции вычитания'''
+        return int(self.channel_subs_count) - int(other.channel_subs_count)
+
+    def __gt__(self, other):
+        '''метод для операции сравнения «больше»'''
+        return int(self.channel_subs_count) > int(other.channel_subs_count)
+
+    def __ge__(self, other):
+        '''метод для операции сравнения «больше» или равно'''
+        return int(self.channel_subs_count) >= int(other.channel_subs_count)
+
+    def __lt__(self, other):
+        '''метод для операции сравнения «меньше»'''
+        return int(self.channel_subs_count) < int(other.channel_subs_count)
+
+    def __le__(self, other):
+        '''метод для операции сравнения «меньше» или равно'''
+        return int(self.channel_subs_count) <= int(other.channel_subs_count)
+
+    def __eq__(self, other):
+        '''метод для операции сравнения  равно'''
+        return int(self.channel_subs_count) == int(other.channel_subs_count)
+
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         # channel = self.get_service().channels().list(id=self.channel_id, part="snippet,statistics").execute()
         print(json.dumps(self.channel, indent=2, ensure_ascii=False))
+
+    def __str__(self):
+        '''Магический метод __str__ возвращающий название и ссылку на канал'''
+        return f"{self.title} ({self.url})"
+
+
 
     @classmethod
     def get_service(cls):
