@@ -28,6 +28,8 @@ class Video:
         """Получение информации о видео"""
         video = self.get_service().videos().list(id=self.video_id, part="snippet,statistics").execute()
         return video
+
+
 class PLVideo(Video):
     '''Инициализация класса PLVideo'''
     def __init__(self, video_id, plist_id):
