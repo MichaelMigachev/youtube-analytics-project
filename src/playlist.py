@@ -3,8 +3,9 @@ import os
 from googleapiclient.discovery import build
 import isodate
 import datetime
+from src.apimixin import APIMixin
 
-class PlayList:
+class PlayList(APIMixin):
     """Class PlayList initializing"""
 
     def __init__(self, pl_id):
@@ -12,12 +13,6 @@ class PlayList:
         self.title = self.get_pl_title()
         self.url = "https://www.youtube.com/playlist?list=" + self.pl_id
 
-    @staticmethod
-    def get_service():
-        """Получение информации о сервисе"""
-        api_key: str = os.getenv("YT_API_KEY")
-        youtube = build("youtube", "v3", developerKey=api_key)
-        return youtube
 
     def get_pl_info(self):
         """Получение информации о плейлисте"""

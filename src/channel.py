@@ -1,8 +1,9 @@
 import json
 import os
 from googleapiclient.discovery import build
+from src.apimixin import APIMixin
 
-class Channel:
+class Channel(APIMixin):
     """Класс для ютуб-канала"""
 
     def __init__(self, channel_id: str) -> None:
@@ -60,14 +61,6 @@ class Channel:
         '''Магический метод __str__ возвращающий название и ссылку на канал'''
         return f"{self.title} ({self.url})"
 
-
-
-    @classmethod
-    def get_service(cls):
-        """Получение информации о сервисе"""
-        api_key: str = os.getenv("YT_API_KEY")
-        youtube = build("youtube", "v3", developerKey=api_key)
-        return youtube
 
     def get_channel_info(self):
         """Получение информации о канале"""
