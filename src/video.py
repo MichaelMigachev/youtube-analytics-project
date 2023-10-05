@@ -6,11 +6,23 @@ class Video:
 
     def __init__(self, video_id):
         self.video_id = video_id                                        # id видео
-        self.video_info = self.get_video_info()
-        self.title = self.video_info["items"][0]["snippet"]["title"]    # название видео
-        self.url = "https://www.youtube.com/watch?v=" + self.video_id   # ссылка на видео
-        self.video_views = self.video_info["items"][0]["statistics"]["viewCount"] #количество просмотров
-        self.video_likes_count = self.video_info["items"][0]["statistics"]["likeCount"] # количество лайков
+        try:
+            self.video_info = self.get_video_info()
+            self.title = self.video_info["items"][0]["snippet"]["title"]    # название видео
+
+        except IndexError:
+            print(f"Неверно указан id видео")
+            self.video_info = None
+            self.title = None
+            self.url = None
+            self.video_views = None
+            self.video_likes_count = None
+            self.real_video_id = None
+
+        else:
+            self.url = "https://www.youtube.com/watch?v=" + self.video_id   # ссылка на видео
+            self.video_views = self.video_info["items"][0]["statistics"]["viewCount"] #количество просмотров
+            self.video_likes_count = self.video_info["items"][0]["statistics"]["likeCount"] # количество лайков
 
     def __str__(self):
         """str инициализация метода"""
